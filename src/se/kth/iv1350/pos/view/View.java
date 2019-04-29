@@ -1,8 +1,11 @@
 package se.kth.iv1350.pos.view;
 
-public class View {
+import se.kth.iv1350.pos.controller.Controller;
 
-	public View() {
-		
+public class View {
+	private Controller contr;
+	
+	public View(Controller contr) {
+		this.contr = contr;
 	}
 }
