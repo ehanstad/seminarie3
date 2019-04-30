@@ -1,7 +1,7 @@
 package se.kth.iv1350.pos.DTO;
 
 /**
- * This class is a DTO to the class Item
+ * Contains information about one particular item
  */
 
 public class ItemDTO {
@@ -13,12 +13,13 @@ public class ItemDTO {
 	private int itemIdentifier;
 	
 	/**
+	 * Creates a new instance representing a particular item
 	 * 
-	 * @param itemName
-	 * @param itemPrice
-	 * @param VAT
-	 * @param itemQuantity
-	 * @param itemIdentifier
+	 * @param itemName The name of the item
+	 * @param itemPrice The price of the item
+	 * @param VAT The tax for the item
+	 * @param itemQuantity The number of items
+	 * @param itemIdentifier The ID for the specific item
 	 */
 	public ItemDTO(String itemName, double itemPrice, double VAT, int itemQuantity, int itemIdentifier) {
 		this.itemName = itemName;
@@ -33,6 +34,16 @@ public class ItemDTO {
 	}
 	
 	public double getItemPrice() {
-		return this.itemPrice;
+		return this.itemPrice*this.VAT;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(itemName + ", ");
+		sb.append(itemPrice + " ");
+		sb.append("moms " + (VAT-1)*100 + "% ");
+		sb.append("antal " + itemQuantity);
+		return sb.toString();
 	}
 }
