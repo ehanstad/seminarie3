@@ -16,9 +16,8 @@ public class Main {
 	 * @param args The application does not take any commend line parameters
 	 */
 	public static void main(String args[]) {
-		Controller contr = new Controller();
 		RegistryCreator creator = new RegistryCreator();
-		Printer printer = new Printer();
+		Controller contr = new Controller(creator);
 		new View(contr).start();
 	}	
 }

@@ -16,7 +16,9 @@ public class CashRegister {
 	 */
 	public CashRegister() {
 		Receipt receipt = new Receipt();
+		this.receipt = receipt;
 		AccountingRegistry accRe = new AccountingRegistry();
+		this.accRe = accRe;
 	}
 	
 	/**

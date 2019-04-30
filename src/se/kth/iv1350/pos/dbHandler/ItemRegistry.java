@@ -23,7 +23,7 @@ public class ItemRegistry {
 	 */
 	public ItemDTO getItemSpecifications(int itemIdentifier, int itemQuantity) {
 		
-		ItemDTO item = new ItemDTO("Tomato", 23.5, 1.12, itemQuantity, itemIdentifier);
+		ItemDTO item = new ItemDTO("Tomat", 23.5, 1.12, itemQuantity, itemIdentifier);
 		return item;
 	}
 }

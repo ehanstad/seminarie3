@@ -5,10 +5,21 @@ package se.kth.iv1350.pos.dbHandler;
  */
 public class RegistryCreator {
 	
-	public RegistryCreator() {
-		ItemRegistry itemRegistry = new ItemRegistry();
-		CustomerRegistry customRegistry = new CustomerRegistry();
-		new InventoryRegistry();
-		new AccountingRegistry();
+	private ItemRegistry itemRegistry = new ItemRegistry();
+	private CustomerRegistry customRegistry = new CustomerRegistry();
+	private InventoryRegistry invenRe = new InventoryRegistry();
+	private AccountingRegistry accountRe = new AccountingRegistry();
+	
+	public ItemRegistry getItemRegistry() {
+		return itemRegistry;
+	}
+	public CustomerRegistry getCustomerRegistry() {
+		return customRegistry;
+	}
+	public InventoryRegistry getInventoryRegistry() {
+		return invenRe;
+	}
+	public AccountingRegistry getAccountingRegistry() {
+		return accountRe;
 	}
 }

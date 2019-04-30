@@ -41,7 +41,7 @@ public class ItemDTO {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(itemName + ", ");
-		sb.append(itemPrice + " ");
+		sb.append(itemPrice + ":- ");
 		sb.append("moms " + (VAT-1)*100 + "% ");
 		sb.append("antal " + itemQuantity);
 		return sb.toString();

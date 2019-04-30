@@ -4,7 +4,9 @@ import se.kth.iv1350.pos.model.CashRegister;
 import se.kth.iv1350.pos.model.Discount;
 import se.kth.iv1350.pos.model.Sale;
 import se.kth.iv1350.pos.DTO.ItemDTO;
+import se.kth.iv1350.pos.DTO.Receipt;
 import se.kth.iv1350.pos.dbHandler.ItemRegistry;
+import se.kth.iv1350.pos.dbHandler.RegistryCreator;
 
 /**
  * This class is the applications controller class. All
@@ -15,12 +17,19 @@ public class Controller {
 	private ItemRegistry itemRe;
 	private Discount discount;
 	private CashRegister cashRe;
+	private Receipt receipt;
 	
 	/**
 	 * Creates a instance of the controller
 	 */
-	public Controller() {
-		
+	public Controller(RegistryCreator creator) {
+		this.itemRe = creator.getItemRegistry();
+		Discount discount = new Discount();
+		this.discount = discount;
+		CashRegister cashRe = new CashRegister();
+		this.cashRe = cashRe;
+		Receipt receipt = new Receipt();
+		this.receipt = receipt;
 	}
 	
 	/**
@@ -29,9 +38,7 @@ public class Controller {
 	public void startNewSale() {
 		
 		Sale sale = new Sale();
-		ItemRegistry itemRe = new ItemRegistry();
-		Discount discount = new Discount();
-		CashRegister cashRe = new CashRegister();
+		this.sale = sale;
 	}
 	
 	/**
@@ -49,8 +56,11 @@ public class Controller {
 		if (checkItemExistens(itemSpecifications)) {
 			return "Item does not exist";
 		}
-		sale.addItem(itemSpecifications);
-		return "Item added";
+		else {
+			System.out.println("t");
+			sale.addItem(itemSpecifications);
+			return "Item added";
+		}
 	}
 	
 	private boolean checkItemExistens(ItemDTO itemSpecifications) {
@@ -79,6 +89,7 @@ public class Controller {
 		double totalPrice = discount.calculateDiscount(customerID, sale.paymentInfo());
 		cashRe.addPayment(totalPrice);
 		double change = sale.calculateChange(cash, totalPrice);
+		receipt.printReceipt();
 		return change;
 	}
 }

@@ -2,13 +2,14 @@ package se.kth.iv1350.pos.DTO;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  *	Contains information regarding the receipt
  */
 public class ReceiptDTO {
 	
-	private ArrayList<ItemDTO> itemList;
+	private List<ItemDTO> itemList;
 	private String storeName;
 	private String storeAdress;
 	private Date date;
@@ -16,7 +17,7 @@ public class ReceiptDTO {
 	private double amountPaid;
 	private double change;
 	
-	public ReceiptDTO(ArrayList<ItemDTO> itemList,String storeName,String storeAdress,Date date,double totalPrice, double amountPaid, double change){
+	public ReceiptDTO(List<ItemDTO> itemList,String storeName,String storeAdress,Date date,double totalPrice, double amountPaid, double change){
 		this.itemList = itemList;
 		this.storeName = storeName;
 		this.storeAdress = storeAdress;
@@ -29,7 +30,9 @@ public class ReceiptDTO {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(itemList + ",\n");
+		for (int i = 0; i < itemList.size(); i++) {
+			sb.append(itemList.get(i) + "\n");
+		}
 		sb.append(storeName + "\n");
 		sb.append("Adress: " + storeAdress + "\n");
 		sb.append(date + "\n");

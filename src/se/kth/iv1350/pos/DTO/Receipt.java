@@ -2,6 +2,8 @@ package se.kth.iv1350.pos.DTO;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import se.kth.iv1350.pos.DTO.ItemDTO;
 import se.kth.iv1350.pos.dbHandler.Printer;
 
@@ -10,7 +12,7 @@ import se.kth.iv1350.pos.dbHandler.Printer;
  */
 public class Receipt {
 	
-	private ArrayList<ItemDTO> itemListReceipt;
+	private List<ItemDTO> itemListReceipt;
 	private String storeName = "The good food";
 	private String storeAdress = "Sturegatan 33";
 	private Date date = new Date();
@@ -24,6 +26,7 @@ public class Receipt {
 	 */
 	public Receipt() {
 		Printer printer = new Printer();
+		this.printer = printer;
 	}
 	
 	/**
@@ -33,7 +36,7 @@ public class Receipt {
 	 * @param change The amount of money paid of the customer
 	 * @param cash The amount paid back to the customer
 	 */
-	public void receiptUpdate(ArrayList<ItemDTO> itemList, double totalPrice, double change, double cash) {
+	public void receiptUpdate(List<ItemDTO> itemList, double totalPrice, double change, double cash) {
 		itemListReceipt = itemList;
 		totalPriceReceipt = totalPrice;
 		changeReceipt = change;

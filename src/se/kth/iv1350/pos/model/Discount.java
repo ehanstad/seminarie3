@@ -4,16 +4,17 @@ import se.kth.iv1350.pos.dbHandler.CustomerRegistry;
 
 public class Discount {
 	
-	private CustomerRegistry custumerRe;
+	private CustomerRegistry customerRe;
 	
 	public Discount() {
 		
-		CustomerRegistry custumerRe = new CustomerRegistry();
+		CustomerRegistry customerRe = new CustomerRegistry();
+		this.customerRe = customerRe;
 	}
 	
 	public double calculateDiscount(int customerID, double totalPrice) {
 		
-		float discount = custumerRe.getDiscount(customerID);
+		float discount = customerRe.getDiscount(customerID);
 		return totalPrice*discount;
 	}
 

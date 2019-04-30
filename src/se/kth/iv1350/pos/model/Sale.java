@@ -1,6 +1,8 @@
 package se.kth.iv1350.pos.model;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import se.kth.iv1350.pos.DTO.ItemDTO;
 import se.kth.iv1350.pos.DTO.Receipt;
 import se.kth.iv1350.pos.dbHandler.InventoryRegistry;
@@ -10,7 +12,7 @@ import se.kth.iv1350.pos.dbHandler.InventoryRegistry;
  */
 public class Sale {
 
-	private ArrayList<ItemDTO> itemList = new ArrayList<ItemDTO>();
+	private List<ItemDTO> itemList = new ArrayList<>();
 	private InventoryRegistry inventoryRe;
 	private Receipt receipt;
 	
@@ -19,7 +21,9 @@ public class Sale {
 	 */
 	public Sale() {
 		InventoryRegistry inventoryRe = new InventoryRegistry();
+		this.inventoryRe = inventoryRe;
 		Receipt receipt = new Receipt();
+		this.receipt = receipt;
 	}
 	
 	/**
@@ -54,7 +58,7 @@ public class Sale {
 		return totalPrice;
 	}
 	
-	private double calculateTotalPrice(ArrayList<ItemDTO> itemList) {
+	private double calculateTotalPrice(List<ItemDTO> itemList) {
 		double totalPrice = itemList.get(0).getItemPrice();
 		
 		for(int i=1; i<itemList.size(); i++) 
