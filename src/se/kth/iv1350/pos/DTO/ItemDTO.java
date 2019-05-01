@@ -34,16 +34,28 @@ public class ItemDTO {
 	}
 	
 	public double getItemPrice() {
-		return this.itemPrice*this.VAT;
+		return this.itemPrice;
+	}
+	
+	public double getVAT() {
+		return this.VAT;
+	}
+	
+	public int getItemQuantity() {
+		return this.itemQuantity;
 	}
 	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
+		sb.append(itemQuantity + "x ");
 		sb.append(itemName + ", ");
 		sb.append(itemPrice + ":- ");
 		sb.append("moms " + (VAT-1)*100 + "% ");
-		sb.append("antal " + itemQuantity);
 		return sb.toString();
+	}
+
+	public void addSameItem() {
+		this.itemQuantity++;
 	}
 }

@@ -16,8 +16,9 @@ public class ReceiptDTO {
 	private double totalPrice;
 	private double amountPaid;
 	private double change;
+	private double totalVAT;
 	
-	public ReceiptDTO(List<ItemDTO> itemList,String storeName,String storeAdress,Date date,double totalPrice, double amountPaid, double change){
+	public ReceiptDTO(List<ItemDTO> itemList,String storeName,String storeAdress,Date date,double totalPrice, double amountPaid, double change, double totalVAT){
 		this.itemList = itemList;
 		this.storeName = storeName;
 		this.storeAdress = storeAdress;
@@ -25,6 +26,7 @@ public class ReceiptDTO {
 		this.totalPrice = totalPrice;
 		this.amountPaid = amountPaid;
 		this.change = change;
+		this.totalVAT = totalVAT;
 	}
 	
 	@Override
@@ -37,6 +39,7 @@ public class ReceiptDTO {
 		sb.append("Adress: " + storeAdress + "\n");
 		sb.append(date + "\n");
 		sb.append("Totalpris: " + totalPrice + "\n");
+		sb.append("MomsPris: " + totalVAT + "\n");
 		sb.append("Motaget kontant: " + amountPaid + "\n");
 		sb.append("Tillbaka: " + change);
 		return sb.toString();

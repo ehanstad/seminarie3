@@ -6,6 +6,8 @@ package se.kth.iv1350.pos.dbHandler;
  */
 public class CustomerRegistry {
 	
+	private static final int VALID_CUSTOMERID = 1;
+	
 	/**
 	 * Creates a new instance representing the customer database
 	 */
@@ -14,12 +16,15 @@ public class CustomerRegistry {
 	}
 
 	/**
-	 * This is a hardcoded method witch gets the customers discount on a 
+	 * This is a hard-coded method witch gets the customers discount on a 
 	 * sale
 	 * @param customerID Unique customer identification
 	 * @return The discount value
 	 */
-	public float getDiscount(int customerID) {		
-		return (float) 0.15;
+	public double getDiscount(int customerID) {		
+		if(customerID == VALID_CUSTOMERID)
+			return 0.95;
+		else
+			return 1;
 	}
 }

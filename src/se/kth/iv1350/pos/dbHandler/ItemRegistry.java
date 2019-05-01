@@ -8,6 +8,10 @@ import se.kth.iv1350.pos.DTO.ItemDTO;
  */
 public class ItemRegistry {
 	
+	ItemDTO[] itemsToSell = {	new ItemDTO("Tomat", 10, 1.06, 1,  1),
+								new ItemDTO("Äpple", 10, 1.12, 1, 2),
+								new ItemDTO("Lime", 10, 1.25, 1, 3)};
+	
 	/**
 	 * Creates a new instance representing the item database
 	 */
@@ -21,9 +25,11 @@ public class ItemRegistry {
 	 * @param itemQuantity The number of items scanned at once
 	 * @return The item specifications matched with the itemIdentifier
 	 */
-	public ItemDTO getItemSpecifications(int itemIdentifier, int itemQuantity) {
+	public ItemDTO getItemSpecifications(int itemIdentifier) {
 		
-		ItemDTO item = new ItemDTO("Tomat", 23.5, 1.12, itemQuantity, itemIdentifier);
+		ItemDTO item = itemsToSell[itemIdentifier-1];
 		return item;
 	}
+	
+	
 }

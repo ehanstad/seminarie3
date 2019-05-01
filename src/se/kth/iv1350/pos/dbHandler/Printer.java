@@ -7,7 +7,7 @@ public class Printer {
 
 	/**
 	 * Prints the receipt
-	 * @param receipt All information regarding the the sale
+	 * @param receipt All information regarding the sale
 	 */
 	public void printReceipt(String receipt) {
 		System.out.println(receipt);

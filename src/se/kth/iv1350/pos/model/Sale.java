@@ -16,7 +16,6 @@ public class Sale {
 
 	private List<ItemDTO> itemList = new ArrayList<>();
 	private InventoryRegistry inventoryRe;
-	private Receipt receipt;
 	private Date date = new Date();
 	
 	/**
@@ -25,8 +24,6 @@ public class Sale {
 	public Sale() {
 		InventoryRegistry inventoryRe = new InventoryRegistry();
 		this.inventoryRe = inventoryRe;
-		Receipt receipt = new Receipt();
-		this.receipt = receipt;
 	}
 	
 	/**
@@ -45,8 +42,9 @@ public class Sale {
 	 */
 	public double calculateChange(double cash, double totalPrice) {
 		double change = cash - totalPrice;
-		//receipt.receiptUpdate(this.itemList,totalPrice, change, cash);
-		System.out.println(change);
+		if (change<0) {
+			throw new IllegalArgumentException("Not enough money");
+		}
 		return change;
 	}
 	
@@ -58,16 +56,15 @@ public class Sale {
 	public double paymentInfo() {
 		double totalPrice = calculateTotalPrice(this.itemList);
 		inventoryRe.inventoryUpdate(this.itemList);
-		
 		return totalPrice;
 	}
 	
 	private double calculateTotalPrice(List<ItemDTO> itemList) {
-		double totalPrice = itemList.get(0).getItemPrice();
+		double totalPrice = 0;
 		
-		for(int i=1; i<itemList.size(); i++) 
-			totalPrice += itemList.get(i).getItemPrice();
-		
+		for(int i=0; i<itemList.size(); i++) {
+				totalPrice += itemList.get(i).getItemPrice()*itemList.get(i).getVAT()*itemList.get(i).getItemQuantity();
+		}
 		return totalPrice;
 	}
 
@@ -78,8 +75,22 @@ public class Sale {
 	 * @param change The amount of money paid back to the customer
 	 * @return All information needed for the receipt
 	 */
-	public ReceiptDTO createReceipt(double cash, double totalPrice, double change) {
-		ReceiptDTO receiptInfo = new ReceiptDTO(itemList, "The good food", "Sturegatan 33", date, totalPrice, cash, change);
+	public ReceiptDTO createReceipt(double cash, double totalPrice, double change, double totalVAT) {
+		ReceiptDTO receiptInfo = new ReceiptDTO(itemList, "The good food", "Sturegatan 33", date, totalPrice, cash, change, totalVAT);
 		return receiptInfo;
+	}
+
+	/**
+	 * This method calculates the total amount of money being VAT for the sale.
+	 * @return 
+	 */
+	public double calculateTotalVAT(double totalPrice) {
+		double totalVAT = 0;
+		
+		for(int i = 0; i<this.itemList.size(); i++) 
+			totalVAT += itemList.get(i).getItemPrice();
+		
+		totalVAT = totalPrice - totalVAT;
+		return totalVAT;
 	}
 }

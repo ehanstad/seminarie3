@@ -14,7 +14,7 @@ public class Discount {
 	
 	public double calculateDiscount(int customerID, double totalPrice) {
 		
-		float discount = customerRe.getDiscount(customerID);
+		double discount = customerRe.getDiscount(customerID);
 		return totalPrice*discount;
 	}
 

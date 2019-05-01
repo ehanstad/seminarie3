@@ -50,22 +50,14 @@ public class Controller {
 	 * @param itemQuantity
 	 * @return
 	 */
-	public String addItem(int itemIdentifier, int itemQuantity) {
+	public void addItem(int itemIdentifier, int itemQuantity) {
 		
-		ItemDTO itemSpecifications = itemRe.getItemSpecifications(itemIdentifier, itemQuantity);
-		
-		if (checkItemExistens(itemSpecifications)) {
-			return "Item does not exist";
+		ItemDTO itemSpecifications = itemRe.getItemSpecifications(itemIdentifier);
+		while(itemQuantity>1) {
+			itemSpecifications.addSameItem();
+			itemQuantity--;
 		}
-		else {
-			sale.addItem(itemSpecifications);
-			return "Item added";
-		}
-	}
-	
-	private boolean checkItemExistens(ItemDTO itemSpecifications) {
-		
-		return itemSpecifications.getItemName() == null;
+		sale.addItem(itemSpecifications);
 	}
 	
 	/**
@@ -89,7 +81,8 @@ public class Controller {
 		double totalPrice = discount.calculateDiscount(customerID, totalPriceBeforeDiscount);
 		cashRe.addPayment(totalPrice);
 		double change = sale.calculateChange(cash, totalPrice);
-		ReceiptDTO receiptInfo = sale.createReceipt(cash, totalPrice, change);
+		double totalVAT = sale.calculateTotalVAT(totalPrice);
+		ReceiptDTO receiptInfo = sale.createReceipt(cash, totalPrice, change, totalVAT);
 		receipt.printReceipt(receiptInfo);
 		return change;
 	}
