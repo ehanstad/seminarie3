@@ -26,7 +26,6 @@ public class ItemRegistry {
 	 * @return The item specifications matched with the itemIdentifier
 	 */
 	public ItemDTO getItemSpecifications(int itemIdentifier) {
-		
 		ItemDTO item = itemsToSell[itemIdentifier-1];
 		return item;
 	}

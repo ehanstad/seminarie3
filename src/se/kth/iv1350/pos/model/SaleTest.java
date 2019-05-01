@@ -30,9 +30,4 @@ class SaleTest {
 			
 		}
 	}
-	
-	@Test
-	void testCalculateTotalVAT() {
-		
-	}
 }

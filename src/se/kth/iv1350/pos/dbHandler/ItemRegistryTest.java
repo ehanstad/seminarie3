@@ -13,8 +13,14 @@ class ItemRegistryTest {
 	
 	@Test
 	void testItemRegistryValidItemIdentifier() {
-		ItemDTO output = itemRe.getItemSpecifications(2);
-		assertEquals(testItem, output);
+		String outputName = itemRe.getItemSpecifications(2).getItemName();
+		double outputPrice = itemRe.getItemSpecifications(2).getItemPrice();
+		double outputVAT = itemRe.getItemSpecifications(2).getVAT();
+		double outputID = itemRe.getItemSpecifications(2).getItemIdentifier();
+		assertEquals("Äpple", outputName);
+		assertEquals(10, outputPrice);
+		assertEquals(1.12, outputVAT);
+		assertEquals(2, outputID);
 	}
-
+	
 }

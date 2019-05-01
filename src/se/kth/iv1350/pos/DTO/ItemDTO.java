@@ -29,6 +29,10 @@ public class ItemDTO {
 		this.itemIdentifier = itemIdentifier;
 	}
 	
+	public int getItemIdentifier() {
+		return this.itemIdentifier;
+	}
+	
 	public String getItemName() {
 		return this.itemName;
 	}
