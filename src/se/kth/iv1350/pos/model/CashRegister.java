@@ -27,7 +27,6 @@ public class CashRegister {
 	 */
 	public void addPayment(double totalPrice) {
 		accRe.accountingUpdate(totalPrice);
-		receipt.printReceipt();
 	}
 
 }

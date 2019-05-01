@@ -25,8 +25,9 @@ public class View {
 		contr.startNewSale();
 		String itemExcistens = contr.addItem(123, 1);
 		System.out.println(itemExcistens);
-		contr.startPayment();
-		double change = contr.checksForDiscount(1, 300);
+		double totalPriceBeforeDiscount = contr.startPayment();
+		System.out.println(totalPriceBeforeDiscount);
+		double change = contr.checksForDiscount(1, 300, totalPriceBeforeDiscount);
 		System.out.println(change);
 	}
 }

@@ -5,6 +5,7 @@ import se.kth.iv1350.pos.model.Discount;
 import se.kth.iv1350.pos.model.Sale;
 import se.kth.iv1350.pos.DTO.ItemDTO;
 import se.kth.iv1350.pos.DTO.Receipt;
+import se.kth.iv1350.pos.DTO.ReceiptDTO;
 import se.kth.iv1350.pos.dbHandler.ItemRegistry;
 import se.kth.iv1350.pos.dbHandler.RegistryCreator;
 
@@ -57,7 +58,6 @@ public class Controller {
 			return "Item does not exist";
 		}
 		else {
-			System.out.println("t");
 			sale.addItem(itemSpecifications);
 			return "Item added";
 		}
@@ -84,12 +84,13 @@ public class Controller {
 	 * @param customerID Unique ID for specific customer
 	 * @param cash Amount of money paid from customer
 	 */
-	public double checksForDiscount(int customerID,double cash) {
+	public double checksForDiscount(int customerID, double cash, double totalPriceBeforeDiscount) {
 		
-		double totalPrice = discount.calculateDiscount(customerID, sale.paymentInfo());
+		double totalPrice = discount.calculateDiscount(customerID, totalPriceBeforeDiscount);
 		cashRe.addPayment(totalPrice);
 		double change = sale.calculateChange(cash, totalPrice);
-		receipt.printReceipt();
+		ReceiptDTO receiptInfo = sale.createReceipt(cash, totalPrice, change);
+		receipt.printReceipt(receiptInfo);
 		return change;
 	}
 }
