@@ -23,7 +23,7 @@ public class View {
 	 */
 	public void start() {
 		contr.startNewSale();
-		contr.addItem(4, 2);
+		contr.addItem(2, 2);
 		double totalPriceBeforeDiscount = contr.startPayment();
 		System.out.println(totalPriceBeforeDiscount);
 		double change = contr.checksForDiscount(2, 300, totalPriceBeforeDiscount);
