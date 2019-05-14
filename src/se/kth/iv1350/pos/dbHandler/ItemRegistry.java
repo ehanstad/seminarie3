@@ -1,6 +1,7 @@
 package se.kth.iv1350.pos.dbHandler;
 
 import se.kth.iv1350.pos.DTO.ItemDTO;
+import se.kth.iv1350.pos.exceptionHandler.InvalidIdentifierException;
 
 /**
  * This program has no database, instead this class is a placeholder 
@@ -24,9 +25,20 @@ public class ItemRegistry {
 	 * @param itemIdentifier The ID for a specific item
 	 * @param itemQuantity The number of items scanned at once
 	 * @return The item specifications matched with the itemIdentifier
+	 * @throws InvalidIdentifierException If the ID could not be found
+	 * in the registry.
 	 */
-	public ItemDTO getItemSpecifications(int itemIdentifier) {
-		ItemDTO item = itemsToSell[itemIdentifier-1];
+	public ItemDTO getItemSpecifications(int itemIdentifier) throws InvalidIdentifierException {
+		ItemDTO item = null;
+		int i = 0;
+		while(itemsToSell.length > i) {
+			if(itemsToSell[i].getItemIdentifier() == itemIdentifier)
+				item = itemsToSell[itemIdentifier-1];
+			i++;
+		}
+		if(item == null) {
+			throw new InvalidIdentifierException(itemIdentifier + " är ett ogiltigt ID.");
+		}
 		return item;
 	}
 	

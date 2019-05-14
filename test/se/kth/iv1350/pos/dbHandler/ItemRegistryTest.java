@@ -1,10 +1,10 @@
-package se.kth.iv1350.pos.dbHandler;
-
+import se.kth.iv1350.posTest.dbHandler.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
 import se.kth.iv1350.pos.DTO.ItemDTO;
+import se.kth.iv1350.pos.dbHandler.ItemRegistry;
 
 class ItemRegistryTest {
 	

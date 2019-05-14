@@ -1,19 +1,25 @@
 package se.kth.iv1350.pos.controller;
 
+import se.kth.iv1350.pos.model.AmountPaidObserver;
 import se.kth.iv1350.pos.model.CashRegister;
 import se.kth.iv1350.pos.model.Discount;
 import se.kth.iv1350.pos.model.Sale;
+import se.kth.iv1350.pos.view.TotalRevenueView;
 import se.kth.iv1350.pos.DTO.ItemDTO;
 import se.kth.iv1350.pos.DTO.Receipt;
 import se.kth.iv1350.pos.DTO.ReceiptDTO;
 import se.kth.iv1350.pos.dbHandler.ItemRegistry;
 import se.kth.iv1350.pos.dbHandler.RegistryCreator;
+import se.kth.iv1350.pos.exceptionHandler.InvalidIdentifierException;
+import se.kth.iv1350.pos.exceptionHandler.OperationFailedException;
 
 /**
  * This class is the applications controller class. All
  * calls to the model pass through here
  */
 public class Controller {
+	
+	private AmountPaidObserver observer;
 	private Sale sale;
 	private ItemRegistry itemRe;
 	private Discount discount;
@@ -48,16 +54,23 @@ public class Controller {
 	 * 
 	 * @param itemIdentifier 
 	 * @param itemQuantity
-	 * @return
+	 * @throws OperationFailedException If failed to complete the Sale
 	 */
-	public void addItem(int itemIdentifier, int itemQuantity) {
+	public void addItem(int itemIdentifier, int itemQuantity) throws
+											OperationFailedException {
 		
-		ItemDTO itemSpecifications = itemRe.getItemSpecifications(itemIdentifier);
-		while(itemQuantity>1) {
-			itemSpecifications.addSameItem();
-			itemQuantity--;
+		ItemDTO itemSpecifications;
+		try {
+			itemSpecifications = itemRe.getItemSpecifications(itemIdentifier);
+			
+			while(itemQuantity>1) {
+				itemSpecifications.addSameItem();
+				itemQuantity--;
+			}
+			sale.addItem(itemSpecifications);
+		} catch (InvalidIdentifierException e) {
+			throw new OperationFailedException("Kunde inte genomföra köpet, " + e.toString(), e);
 		}
-		sale.addItem(itemSpecifications);
 	}
 	
 	/**
@@ -82,8 +95,17 @@ public class Controller {
 		cashRe.addPayment(totalPrice);
 		double change = sale.calculateChange(cash, totalPrice);
 		double totalVAT = sale.calculateTotalVAT(totalPrice);
+		notifyObservers(totalPrice);
 		ReceiptDTO receiptInfo = sale.createReceipt(cash, totalPrice, change, totalVAT);
 		receipt.printReceipt(receiptInfo);
 		return change;
+	}
+	
+	private void notifyObservers(double totalPrice) {
+		observer.newSalePaid(totalPrice);
+	}
+
+	public void addObserver(AmountPaidObserver observer) {
+		this.observer = observer;
 	}
 }

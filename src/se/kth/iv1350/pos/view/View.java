@@ -1,6 +1,8 @@
 package se.kth.iv1350.pos.view;
 
 import se.kth.iv1350.pos.controller.Controller;
+import se.kth.iv1350.pos.exceptionHandler.ErrorMessageHandler;
+import se.kth.iv1350.pos.exceptionHandler.OperationFailedException;
 
 /**
  * This program has no view, instead this class is a placeholder 
@@ -9,6 +11,7 @@ import se.kth.iv1350.pos.controller.Controller;
 
 public class View {
 	private Controller contr;
+	private ErrorMessageHandler errorMsgHandler;
 	
 	/**
 	 * Creates a new instance
@@ -16,17 +19,24 @@ public class View {
 	 */
 	public View(Controller contr) {
 		this.contr = contr;
+		ErrorMessageHandler errorMsgHandler = new ErrorMessageHandler();
+		this.errorMsgHandler = errorMsgHandler;
 	}
 	
 	/**
 	 * Hard-coded code to represent the view
 	 */
 	public void start() {
-		contr.startNewSale();
-		contr.addItem(2, 2);
-		double totalPriceBeforeDiscount = contr.startPayment();
-		System.out.println(totalPriceBeforeDiscount);
-		double change = contr.checksForDiscount(2, 300, totalPriceBeforeDiscount);
-		System.out.println(change);
+		try {
+			contr.startNewSale();
+			contr.addItem(2, 2);
+			double totalPriceBeforeDiscount = contr.startPayment();
+			System.out.println(totalPriceBeforeDiscount);
+			double change = contr.checksForDiscount(2, 300, totalPriceBeforeDiscount);
+			System.out.println(change);
+		}
+		catch(OperationFailedException e){
+			errorMsgHandler.showErrorMessage(e.toString());
+		}
 	}
 }

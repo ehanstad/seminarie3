@@ -1,10 +1,5 @@
 package se.kth.iv1350.pos.DTO;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import se.kth.iv1350.pos.DTO.ItemDTO;
 import se.kth.iv1350.pos.dbHandler.Printer;
 
 /**

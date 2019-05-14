@@ -1,6 +1,5 @@
 package se.kth.iv1350.pos.DTO;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
