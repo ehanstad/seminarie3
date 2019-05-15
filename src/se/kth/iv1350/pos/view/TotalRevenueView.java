@@ -8,7 +8,7 @@ import se.kth.iv1350.pos.model.AmountPaidObserver;
  */
 public class TotalRevenueView implements AmountPaidObserver {
 
-	public double totalAmountPaid;
+	private double totalAmountPaid;
 	
 	@Override
 	public void newSalePaid(double newTotalAmountPaid) {
@@ -17,7 +17,7 @@ public class TotalRevenueView implements AmountPaidObserver {
 	}
 
 	private void showAmountPaid(double totalAmountPaid) {
-		System.out.println("Pengar betalade: " + totalAmountPaid);
+		System.out.println("(TotalRevenueView) Pengar betalade: " + totalAmountPaid);
 	}
 
 }

@@ -36,7 +36,7 @@ public class View {
 	public void start() {
 		contr.startNewSale();
 		try {
-			contr.addItem(7, 2);
+			contr.addItem(2, 2);
 		} catch(OperationFailedException e){
 			errorMsgHandler.showErrorMessage(e.toString());
 			logHandler.logException(e);
