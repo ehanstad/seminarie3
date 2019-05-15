@@ -1,6 +1,5 @@
 package se.kth.iv1350.pos.dbHandler;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import se.kth.iv1350.pos.DTO.ItemDTO;

@@ -10,7 +10,9 @@ import se.kth.iv1350.pos.DTO.Receipt;
 import se.kth.iv1350.pos.DTO.ReceiptDTO;
 import se.kth.iv1350.pos.dbHandler.ItemRegistry;
 import se.kth.iv1350.pos.dbHandler.RegistryCreator;
+import se.kth.iv1350.pos.exceptionHandler.DatabaseFailedException;
 import se.kth.iv1350.pos.exceptionHandler.InvalidIdentifierException;
+import se.kth.iv1350.pos.exceptionHandler.ItemRegistryException;
 import se.kth.iv1350.pos.exceptionHandler.OperationFailedException;
 
 /**
@@ -56,8 +58,8 @@ public class Controller {
 	 * @param itemQuantity
 	 * @throws OperationFailedException If failed to complete the Sale
 	 */
-	public void addItem(int itemIdentifier, int itemQuantity) throws
-											OperationFailedException {
+	public void addItem(int itemIdentifier, int itemQuantity) 
+			throws OperationFailedException, DatabaseFailedException {
 		
 		ItemDTO itemSpecifications;
 		try {
@@ -70,6 +72,8 @@ public class Controller {
 			sale.addItem(itemSpecifications);
 		} catch (InvalidIdentifierException e) {
 			throw new OperationFailedException("Kunde inte genomföra köpet, " + e.toString(), e);
+		} catch (ItemRegistryException e) {
+			throw new DatabaseFailedException(e.toString());
 		}
 	}
 	

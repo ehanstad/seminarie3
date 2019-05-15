@@ -31,6 +31,7 @@ public class ReceiptDTO {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
+		sb.append("\n" +"*****************************" + "\n");
 		for (int i = 0; i < itemList.size(); i++) {
 			sb.append(itemList.get(i) + "\n");
 		}
@@ -40,7 +41,8 @@ public class ReceiptDTO {
 		sb.append("Totalpris: " + totalPrice + "\n");
 		sb.append("MomsPris: " + totalVAT + "\n");
 		sb.append("Motaget kontant: " + amountPaid + "\n");
-		sb.append("Tillbaka: " + change);
+		sb.append("Tillbaka: " + change + "\n");
+		sb.append("*****************************" + "\n");
 		return sb.toString();
 	}
 }

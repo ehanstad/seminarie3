@@ -1,0 +1,5 @@
+Wed May 15 13:09:12 CEST 2019, Exception kastades: se.kth.iv1350.pos.exceptionHandler.DatabaseFailedException: se.kth.iv1350.pos.exceptionHandler.ItemRegistryException: Misslycakde att ansluta till databasen
+se.kth.iv1350.pos.exceptionHandler.DatabaseFailedException: se.kth.iv1350.pos.exceptionHandler.ItemRegistryException: Misslycakde att ansluta till databasen
+	at se.kth.iv1350.pos.controller.Controller.addItem(Controller.java:76)
+	at se.kth.iv1350.pos.view.View.start(View.java:37)
+	at se.kth.iv1350.pos.startup.Main.main(Main.java:22)
